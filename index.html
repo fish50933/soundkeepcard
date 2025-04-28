@@ -1,48 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundKeep - Voice Card</title>
-    <style>
-        body {
-            background: linear-gradient(135deg, #1d2b64, #f8cdda);
-            font-family: Arial, sans-serif;
-            color: white;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2rem;
-            border-radius: 15px;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-        }
-        .card h1 {
-            font-size: 2rem;
-        }
-        .audio-player {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>祝福卡片</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="card">
-        <h1>Welcome to SoundKeep Voice Card</h1>
-        <p>Scan the QR code to play a voice message!</p>
-        <div class="audio-player">
-            <audio controls>
-                <source src="assets/audio/sample.mp3" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </div>
+  <div class="card">
+    <h1>祝福語</h1>
+    <p id="blessing-message">加載中...</p>
+
+    <h2>播放音頻</h2>
+    <audio id="audio-player" controls>
+      <source src="" type="audio/mp3">
+      你的瀏覽器不支持音頻播放。
+    </audio>
+  </div>
+
+  <script>
+    // 假設從 JSON 獲取的資料
+    fetch('cardData.json')
+      .then(response => response.json())
+      .then(data => {
+        // 獲取 URL 參數中的卡片 ID
+        const cardId = new URLSearchParams(window.location.search).get('id');
+        const card = data.find(card => card.id === cardId);
+
+        if (card) {
+          document.getElementById("blessing-message").textContent = card.blessing;
+          document.getElementById("audio-player").src = "assets/audio/" + card.audio;
+        }
+      })
+      .catch(error => console.error('Error loading card data:', error));
+  </script>
 </body>
 </html>
