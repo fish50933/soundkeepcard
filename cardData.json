@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "blessing": "祝福語：生日快樂！",
+    "audio": "audio1.mp3"
+  },
+  {
+    "id": "2",
+    "blessing": "祝福語：早日康復！",
+    "audio": "audio2.mp3"
+  }
+]
